@@ -3,14 +3,13 @@
 class c_koneksi {
 
     public function conn() {
-        $conn = mysqli_connect("localhost", "root", "", "penginapan");
+        $conn = mysqli_connect("localhost", "root", "", "camp");
         return $conn;
 
         if (!$conn) {
             die("koneksi gagal: " . mysqli_connect_error());
         } else {
-            echo "<script> alert('koneksi databse berhasil');
-            </script>";
+           return $conn;
         }
     }
 }

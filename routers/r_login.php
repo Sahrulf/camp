@@ -23,9 +23,9 @@ try {
             document.location.href = '../index.php';
             </script>";
         }
-    }elseif ($_GET["aksi"] == "login") {
-        $email = $_POST["email"];
-        $pass = $_POST["pass"];
+    }elseif ($_GET['aksi'] == "login") {
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
 
         if($email != $pass) {
             echo "<script> alert('password/email salah!');
@@ -34,7 +34,7 @@ try {
         }
     
         $login->login($email, $pass);
-    }elseif ($_GET["aksi"] == "logout") {
+    }elseif ($_GET['aksi'] == 'logout') {
         $login->logout();
     }
 } catch (Exception $e) {
