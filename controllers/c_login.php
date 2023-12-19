@@ -1,21 +1,14 @@
 <?php 
-
 session_start();
 include_once "c_koneksi.php";
 class c_login {
-    public function register($id=null, $username=null, $email=null, $password=null, $role=null, $photo=null) {
+    public function register($id=0, $username, $email, $password, $role, $photo) {
 
         $conn = new c_koneksi();
         
-            $query = "INSERT INTO camp VALUES ('$id', '$username', '$email', '$password', '$role', '$photo')";
+            $query = "INSERT INTO user VALUES ('$id', '$username', '$email', '$password', '$role', '')";
             $data = mysqli_query($conn->conn(), $query);
         
-            if ($query) {
-
-                echo "data tidak gagal ditambahkan";
-            } else { 
-                echo "data gagal ditambahkan";
-            }
     }
 
     public function login($email=null, $pass=null) {
@@ -24,7 +17,7 @@ class c_login {
         // jika tombol login di tekan maka jalankan perintah dibawah nya
         if(isset($_POST['login'])) {
             // perintah untuk memanggil semua data berdasarkan dari email yang di input kan oleh user
-            $sql = "SELECT * FROM camp WHERE email = '$email'";
+            $sql = "SELECT * FROM user WHERE email = '$email'";
 
             $query = mysqli_query($conn->conn(), $sql);
 
@@ -39,7 +32,6 @@ class c_login {
                     if ($data['role'] == "admin") {
                         // membuat variabel session yang nantinya akan digunakan pada halaman home admin
                         $_SESSION['data'] = $data;
-
                         $_SESSION['role'] = $data['role'];
 
                         // jika login berhasil maka pindah ke home.php
@@ -50,6 +42,12 @@ class c_login {
                         $_SESSION['role'] = $data['role'];
 
                         header("Location: ../views/home_user.php");
+                        exit;
+                    }elseif($data['role'] == 'kasir') {
+                        $_SESSION['data'] = $data;
+                        $_SESSION['role'] = $data['role'];
+
+                        header("Location: ../views/home_kasir.php");
                         exit;
                     }
                 }else {

@@ -17,24 +17,24 @@ try {
     
         $pass = password_hash($password, PASSWORD_DEFAULT);
     
-        $login->register($id, $username, $email, $pass, $role, $photo);
+        $login->register($id=0, $username, $email, $pass, $role, $photo);
         if($login) {
             echo "<script> alert('akun berhasil register');
             document.location.href = '../index.php';
             </script>";
         }
-    }elseif ($_GET['aksi'] == "login") {
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
+    }elseif ($_GET["aksi"] == "login") {
+        $email = $_POST["email"];
+        $pass = $_POST["pass"];
 
         if($email != $pass) {
-            echo "<script> alert('password/email salah!');
+            echo "<script> alert('Password/Email SALAH!');
             document.location.href = '../index.php';
             </script>";
         }
-    
+        
         $login->login($email, $pass);
-    }elseif ($_GET['aksi'] == 'logout') {
+    }elseif ($_GET["aksi"] == "logout") {
         $login->logout();
     }
 } catch (Exception $e) {

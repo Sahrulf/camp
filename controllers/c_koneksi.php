@@ -1,5 +1,4 @@
 <?php 
-
 class c_koneksi {
 
     public function conn() {
@@ -9,7 +8,8 @@ class c_koneksi {
         if (!$conn) {
             die("koneksi gagal: " . mysqli_connect_error());
         } else {
-           return $conn;
+            echo "<script> alert('koneksi databse berhasil');
+            </script>";
         }
     }
 }
